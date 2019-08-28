@@ -9,12 +9,19 @@ public class ProductVO {
 	private int proPrice;
 	private String proContent;
 	private String proImg;
+	private String proImg2;
 	private String proTitle;
 	private int proStock;
 	private int proSell;
 	private int flag;
 	private String proDiv;
 	
+	public String getProImg2() {
+		return proImg2;
+	}
+	public void setProImg2(String proImg2) {
+		this.proImg2 = proImg2;
+	}
 	public int getProNum() {
 		return proNum;
 	}
