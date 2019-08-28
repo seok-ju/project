@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="boardDAO">
+		<select id="list" resultType="BoardVO">
+				SELECT * FROM BOARD
+				ORDER BY BONUM
+		</select>
+			
+		<select id="select" parameterType="int" resultType="BoardVO">
+                SELECT * FROM
+                BOARD WHERE BONUM = #{BONUM}
+        </select>
+        	
+		<insert id="insert" parameterType="BoardVO">
+				INSERT INTO BOARD
+				(BONUM, PRONUM, NUM, BOID, BOTITLE, BOCONTENT, BOPW, BODIV, BOIMG, BODATE)
+				VALUES
+				(BOARD_BONUM.nextval,
+				#{PRONUM}, #{NUM}, #{BOID}, #{BOTITLE}, #{BOCONTENT}, #{BOPW}, #{BODIV}, #{BOIMG}, SYSDATE)
+				 <selectKey keyProperty="BONUM" resultType="Integer">
+                        SELECT NVL(MAX(BONUM), 0) FROM BOARD
+                </selectKey>
+		</insert>
+		
+		<delete id="delete" parameterType="BoardVO">
+				DELETE FROM BOARD WHERE BONUM = #{BONUM}
+				AND BOPW = #{BOPW}
+		</delete>
+		
+		<update id="update" parameterType="BoardVO">
+				UPDATE BOARD SET BOTITLE = #{BOTITLE},
+				BOCONTENT = #{BOCONTENT},
+				BOIMG = #{BOIMG}
+				WHERE BONUM = #{BONUM} AND BOPW = #{BOPW}
+		</update>
+        
+</mapper>
