@@ -8,9 +8,15 @@
 <title>${productVO.proName}</title>
 </head>
 <body>
+<form method="post" action="<c:url value="/product/main/search"/>">
+	<input type="text" name="search"> <input type="submit" value="상품검색">
+</form>
+<a href='<c:url value="/product/main"/>'>목록</a>
+<a href='<c:url value="/product/modify/${productVO.proNum}"/>'>수정</a>
 <table>
 	<tr>
-		<th rowspan="5"><img src="${pageContext.request.contextPath}${productVO.proImg}" height="400"></th>
+		<th rowspan="7"><img src="${pageContext.request.contextPath}${productVO.proImg}" height="400"></th>
+		<td rowspan="7" width="100"></td>
 		<th colspan="2">${productVO.proName}</th>
 	</tr>
 	<tr>
@@ -19,15 +25,27 @@
 	</tr>
 	<tr>
 		<td>판매가</td>
-		<td>${productVO.proPrice}</td>
+		<td>${productVO.proViewPrice}</td>
 	</tr>
 	<tr>
-		<td>판매량</td>
-		<td>${productVO.proSell}</td>
+		<td>구매혜택</td>
+		<td>적립금 <b>+${point}원</b></td>
 	</tr>
 	<tr>
-		<td>재고</td>
-		<td>${productVO.proStock}</td>
+		<td>배송비</td>
+		<td>무료</td>
+	</tr>
+	<tr>
+		<td>상품코드</td>
+		<td>${productVO.proNum}</td>
+	</tr>
+	<tr>
+		<td><button onclick="location.href='<c:url value=""/>'">바로구매</button></td>
+		<td><button onclick="location.href='<c:url value=""/>'">장바구니</button></td>
+	</tr>
+	<tr>
+		<td>판매량 ${productVO.proSell}</td>
+		<td>재고 ${productVO.proStock}</td>
 	</tr>
 </table>
 

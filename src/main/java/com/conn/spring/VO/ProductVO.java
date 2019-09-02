@@ -7,6 +7,7 @@ public class ProductVO {
 	private int proNum;
 	private String proName;
 	private int proPrice;
+	private String proViewPrice;
 	private String proContent;
 	private String proImg;
 	private String proImg2;
@@ -16,6 +17,12 @@ public class ProductVO {
 	private int flag;
 	private String proDiv;
 	
+	public String getProViewPrice() {
+		return proViewPrice;
+	}
+	public void setProViewPrice(String proViewPrice) {
+		this.proViewPrice = proViewPrice;
+	}
 	public String getProImg2() {
 		return proImg2;
 	}

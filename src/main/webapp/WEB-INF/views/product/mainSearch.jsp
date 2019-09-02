@@ -8,7 +8,7 @@
 <title>핫핑</title>
 </head>
 <body>
-<a href='<c:url value="/product/write"/>'>상품등록</a><br>
+<%-- <a href='<c:url value="/product/write"/>'>상품등록</a><br>
 
 <a href='<c:url value="/product/main?code=${code}&sort=1"/>'>최신순</a>
 <a href='<c:url value="/product/main?code=${code}&sort=2"/>'>인기순</a>
@@ -16,11 +16,12 @@
 
 <a href='<c:url value="/product/main?code=1"/>'>전체메뉴</a>
 <a href='<c:url value="/product/main?code=2"/>'>키링</a>
-<a href='<c:url value="/product/main?code=3"/>'>케이스</a><br>
+<a href='<c:url value="/product/main?code=3"/>'>케이스</a><br> --%>
 
 <form method="post" action="<c:url value="/product/main/search"/>">
 	<input type="text" name="search"> <input type="submit" value="상품검색">
 </form>
+<h3>"${search}" 검색결과  ${Cnt}개</h3> 
 <table>
 	<c:forEach begin="0" end="${Cnt}" varStatus="status" step="5">
 	<tr>
@@ -40,36 +41,11 @@
 	</tr>
 	<tr>
 		<c:forEach begin="${status.index}" end="${status.index+4}" var="product" items="${allList}" varStatus="loop">
-			<td>${product.proViewPrice}<button onclick="window.open('<c:url value="/product/price/${product.proNum}"/>')">가격변경</button></td>
+			<td>${product.proPrice}원</td>
 		</c:forEach>
 	</tr>
 	</c:forEach>
 </table>
 </body>
-
-	<div>
-		<c:if test="${pagination.curRange ne 1 }">
-			<a href='<c:url value="/product/main?code=${code}&sort=${sort}"/>'>[처음]</a>
-		</c:if>
-		<c:if test="${pagination.curPage ne 1}">
-			<a href='<c:url value="/product/main?code=${code}&sort=${sort}&curPage=${pagination.prevPage}"/>'>[이전]</a> 
-		</c:if>
-		<c:forEach var="pageNum" begin="${pagination.startPage }" end="${pagination.endPage }">
-			<c:choose>
-				<c:when test="${pageNum eq  pagination.curPage}">
-					<span style="font-weight: bold;"><a href='<c:url value="/product/main?code=${code}&sort=${sort}&curPage=${pageNum}"/>'>${pageNum }</a></span> 
-				</c:when>
-				<c:otherwise>
-					<a href='<c:url value="/product/main?code=${code}&sort=${sort}&curPage=${pageNum}"/>'>${pageNum }</a> 
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-			<a href='<c:url value="/product/main?code=${code}&sort=${sort}&curPage=${pagination.nextPage}"/>'>[다음]</a> 
-		</c:if>
-		<c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-			<a href='<c:url value="/product/main?code=${code}&sort=${sort}&curPage=${pageCnt}"/>'>[끝]</a> 
-		</c:if>
-	</div>
 
 </html>

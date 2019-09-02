@@ -1,0 +1,146 @@
+#wrap {
+	width:100%;
+}
+#header {
+	width:100%;
+}
+#container {
+	*display:inline-block;
+	_width /**/:100%;
+	padding-right:30px;
+	padding-left:30px;
+}
+#container:after {
+	display:block;
+	clear:both;
+	content:'';
+}
+#content {
+	float:center;
+	width:100%;
+}
+#footer {
+	width:100%;
+}
+div {
+	margin:0 0 10px;
+	padding:10px 0;
+	color:#ffffff;
+	font-family:Tahoma;
+}
+#wrap {
+	text-align: center;
+	position:relative;
+	width:auto;
+	padding:0px 100px;
+	border:1px solid #c9a383;
+	background:#ffffff
+}
+#header {
+	text-align: center;
+	width:auto;
+	margin-top:10px;
+	padding:10px;
+	border:1px solid #ffffff;
+	background:#c9a383;
+}
+#container {
+	text-align: left;
+	position:relative;
+	border:2px solid #ffffff;
+	background:#ffffff;
+}
+#content {
+	position:relative;
+	height:200px;
+	margin-top:10px;
+	border:1px solid #ffffff;
+	background:#c9a383;
+	text-align:center;
+}
+#footer {
+	clear:both;
+	width:auto;
+	padding:10px;
+	border:1px solid #ffffff;
+	background:#c9a383;
+	text-align:center;
+}
+* { 
+	margin:0; 
+	padding:0;
+}
+body {
+	background:#ffffff;
+	padding:35px 0 0;
+	margin:auto;
+}
+.ribbon {
+	padding:auto;
+	display:inline-block;
+	text-align:center;	
+}
+.ribbon:after, .ribbon:before {
+	margin-top:0.5em;
+	content: "";
+	float:left;
+	border:1.5em solid #c9a383;
+}
+.ribbon:after {
+	border-right-color:transparent;
+}
+.ribbon:before {
+	border-left-color:transparent;
+}
+.ribbon a:link, .ribbon a:visited { 
+	color:#ffffff;
+	text-decoration:none;
+	float:left;
+	height:3.5em;
+	overflow:hidden;
+}
+.ribbon span {
+	background:#c9a383;
+	display:inline-block;
+	line-height:3em;
+	padding:0 1em;
+	margin-top:0.5em;
+	position:relative;
+	-webkit-transition: background-color 0.2s, margin-top 0.2s;  /* Saf3.2+, Chrome */
+	-moz-transition: background-color 0.2s, margin-top 0.2s;  /* FF4+ */
+	-ms-transition: background-color 0.2s, margin-top 0.2s;  /* IE10 */
+	-o-transition: background-color 0.2s, margin-top 0.2s;  /* Opera 10.5+ */
+	transition: background-color 0.2s, margin-top 0.2s;
+}
+.ribbon a:hover span {
+	background:#c9a383;
+	margin-top:0;
+}
+.ribbon span:before {
+	content: "";
+	position:absolute;
+	top:3em;
+	left:0;
+	border-right:0.5em solid #9B8651;
+	border-bottom:0.5em solid #c9a383;
+}
+.ribbon span:after {
+	content: "";
+	position:absolute;
+	top:3em;
+	right:0;
+	border-left:0.5em solid #9B8651;
+	border-bottom:0.5em solid #c9a383;
+}
+button {
+	background:#c9a383;
+	color: #ffffff;
+} 
+.left-box {
+	float: left;
+	width: 50%;
+}
+.right-box {
+	float: right;
+	width: 50%;
+}
