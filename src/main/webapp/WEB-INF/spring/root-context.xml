@@ -14,7 +14,7 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.44.128:1521:orcl" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl" />
 		<property name="user" value="c##tester2" />
 		<property name="password" value="1234" />
 		<property name="maxPoolSize" value="100" />
@@ -48,6 +48,8 @@
 
          <!-- defaultEncoding -->
          <property name="defaultEncoding" value="utf-8" />
+         
 	</bean>
+	
 		
 </beans>

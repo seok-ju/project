@@ -24,6 +24,11 @@ public class BoardVoDao {
 		public List<BoardVO> list(){
 				return sqlSessionTemplate.selectList("list");
 		}
+		
+		public List<BoardVO> listme(){
+			return sqlSessionTemplate.selectList("listme");
+		}
+		
 		public int delete(BoardVO boardVO) {
 				return sqlSessionTemplate.delete("delete", boardVO);
 		}
@@ -33,10 +38,21 @@ public class BoardVoDao {
 		public void insert(BoardVO boardVO) {
 				 sqlSessionTemplate.insert("insert", boardVO);
 		}
+		
+		public void insertme(BoardVO boardVO) {
+			 sqlSessionTemplate.insert("insertme", boardVO);
+		}
+		
 		public BoardVO select(int BoNum) {
 				BoardVO vo = (BoardVO) sqlSessionTemplate.selectOne("select", BoNum);
 				return vo;
 		}
+		public int updateRE(BoardVO boardVO) {
+			return sqlSessionTemplate.update("updateRE", boardVO);
+		}
 		
+		public void updateRef(int boNum) {
+			sqlSessionTemplate.update("updateRef", boNum);
+		}
 
 }

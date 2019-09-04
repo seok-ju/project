@@ -31,7 +31,13 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
-
+	
+	<logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.tool.hbm2ddl" level="DEBUG"/>
+    <logger name="org.hibernate.type" level="TRACE" />
+    <logger name="org.hibernate.stat" level="DEBUG" />
+    <logger name="org.hibernate.type.BasicTypeRegistry" level="WARN" />
+	
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

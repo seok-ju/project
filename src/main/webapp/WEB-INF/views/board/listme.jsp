@@ -4,39 +4,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+         var oldView = "";
+      function view(num){
+         var mView = document.getElementById(num);
+         if(oldView != mView){
+            if(oldView != ""){
+               oldView.style.display="none";
+            }
+            mView.style.display = "";
+            oldView = mView;
+         }else{
+            mView.style.display="none";
+            oldView = "";
+         }
+      }
+   </script>
+
+
+<meta charset=UTF-8>
 <title>문의게시판</title>
 </head>
 <body>
-		<table border="1">
-				<tr>
-						<th>이미지</th>
-						<th>NO</th>
-						<th>글제목</th>
-						<th>글내용</th>
-						<th>작성자</th>
-						<th>날짜</th>
-						<th>삭제</th>
-				</tr>
-				<c:forEach var="board" items="${boardList}" varStatus="loop">
+		<table>
+				<c:forEach var="board" items="${boardList}" varStatus="loop">		
 						<tr>
-								<td>${board.boImg}</td>
-								<td>${board.boNum}</td>
-								<td>${board.boTitle}</td>
-								<td>${board.boContent}
-							<c:set var="name" value="관리자"/>
-							<c:if test="${name eq '관리자'}" >
-					<a href="<c:url value="/board/writemeRe" />">답글쓰기</a>
-							</c:if> </td>
-								<td>${board.boId}</td>
-								<td>${board.boDate}</td>
-								
-					<td><a href="<c:url value="/board/delete/${boardVO.boNum}"/>">삭제</a></td>
+								<td rowspan="5"><a href="javascript:view(${loop.index});">${board.boTitle}</a></td>
+								<td> ${board.boId}</td>
+						</tr>
+						<tr>
+							<td>${board.boDate}</td>
+						</tr>
+						<tr>
+							<td><a href='<c:url value="/board/delete/${board.boNum}"/>'>삭제</a></td>
+							
+						</tr>	
+						<tr>
+							<td><a href='<c:url value="/board/edit/${board.boNum}"/>'>수정</a></td>
+						<tr>
+							<td>
+							<%-- <c:if test="${name eq '관리자'}" > --%>
+							<a href="<c:url value="/board/writehgRe/${board.boNum}"  />">답글쓰기</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><div id="${loop.index}" style="display:none">${board.boContent}</div></td>
 						</tr>
 				</c:forEach>
 		</table>
-		<a href="<c:url value="/board/write" />">새글</a>
-		
+
+		<a href="<c:url value="/board/writehg?boDiv=문의" />">새글</a>
 
 </body>
 </html>

@@ -28,6 +28,38 @@ public class BoardVO {
 		private String boImg;	//이미지
 		
 		private Timestamp boDate;	//날짜
+		
+		private int boRef;
+		
+		private int boStep;
+		
+		private int boDepth;
+		
+
+		public int getBoDepth() {
+			return boDepth;
+		}
+
+		public void setBoDepth(int boDepth) {
+			this.boDepth = boDepth;
+		}
+
+		public int getBoRef() {
+			return boRef;
+		}
+
+		public void setBoRef(int boRef) {
+			this.boRef = boRef;
+		}
+
+		public int getBoStep() {
+			return boStep;
+		}
+
+		public void setBoStep(int boStep) {
+			this.boStep = boStep;
+		}
+
 
 		public int getBoNum() {
 			return boNum;

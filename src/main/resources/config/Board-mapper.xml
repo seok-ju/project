@@ -4,36 +4,55 @@
 			
 <mapper namespace="boardDAO">
 		<select id="list" resultType="BoardVO">
-				SELECT * FROM BOARD
-				ORDER BY BONUM
+				SELECT * FROM BOARD 
+				WHERE BODIV='후기' ORDER BY BOREF, BOREF DESC, BOSTEP ASC 
 		</select>
-			
+		
+		<select id="listme" resultType="BoardVO">
+				SELECT * FROM BOARD 
+				WHERE BODIV='문의' ORDER BY BOREF, BOREF DESC, BOSTEP ASC 
+		</select>
+		
 		<select id="select" parameterType="int" resultType="BoardVO">
                 SELECT * FROM
-                BOARD WHERE BONUM = #{BONUM}
+                BOARD WHERE BONUM = #{boNum}
         </select>
-        	
+        
 		<insert id="insert" parameterType="BoardVO">
 				INSERT INTO BOARD
-				(BONUM, PRONUM, NUM, BOID, BOTITLE, BOCONTENT, BOPW, BODIV, BOIMG, BODATE)
+				(BONUM, BODIV, BOTITLE, BOIMG, BOCONTENT, BOPW, BODATE, BOREF )
 				VALUES
 				(BOARD_BONUM.nextval,
-				#{PRONUM}, #{NUM}, #{BOID}, #{BOTITLE}, #{BOCONTENT}, #{BOPW}, #{BODIV}, #{BOIMG}, SYSDATE)
-				 <selectKey keyProperty="BONUM" resultType="Integer">
-                        SELECT NVL(MAX(BONUM), 0) FROM BOARD
-                </selectKey>
+				#{boDiv}, #{boTitle}, #{boImg}, #{boContent}, #{boPw}, sysdate, #{boRef})
 		</insert>
 		
+		<insert id="insertme" parameterType="BoardVO">
+				INSERT INTO BOARD
+				(BONUM, BODIV, BOTITLE, BOCONTENT, BOPW, BODATE, BOREF )
+				VALUES
+				(BOARD_BONUM.nextval,
+				#{boDiv}, #{boTitle}, #{boContent}, #{boPw}, sysdate, #{boRef})
+		</insert>
+		
+		
+		
 		<delete id="delete" parameterType="BoardVO">
-				DELETE FROM BOARD WHERE BONUM = #{BONUM}
-				AND BOPW = #{BOPW}
+				DELETE FROM BOARD WHERE BONUM = #{boNum}
+				AND BOPW = #{boPw}
 		</delete>
 		
 		<update id="update" parameterType="BoardVO">
-				UPDATE BOARD SET BOTITLE = #{BOTITLE},
-				BOCONTENT = #{BOCONTENT},
-				BOIMG = #{BOIMG}
-				WHERE BONUM = #{BONUM} AND BOPW = #{BOPW}
+				UPDATE BOARD SET BOTITLE = #{boTitle},
+				BOCONTENT = #{boContent},
+				BOIMG = #{boImg}
+				WHERE BONUM = #{boNum}
 		</update>
-        
+		<update id="updateRE" parameterType="BoardVO">
+update BOARD set boStep = boStep + 1 where boRef = #{boRef} and boStep > #{boStep}
+		</update>
+		
+		<update id="updateRef" parameterType="int">
+		update BOARD set boRef = #{boNum} where boNum = #{boNum}
+		</update>
+		
 </mapper>
