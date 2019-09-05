@@ -63,6 +63,9 @@ public class ProductService {
 	public ProductVO select(int proNum) {
 		return productDao.select(proNum);
 	}
+	public int selectMaxNum(String proName) {
+		return productDao.selectMaxNum(proName);
+	}
 	
 	public void insert(ProductVO productVO) {
 		productDao.insert(productVO);

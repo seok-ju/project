@@ -60,7 +60,10 @@
 	</select>
 	
 	<select id="select" parameterType="int" resultType="ProductVO">
-		select * from PRODUCT where PRONUM = #{PRONUM}	
+		select * from PRODUCT where PRONUM = #{PRONUM}
+	</select>
+	<select id="selectMaxNum" parameterType="String" resultType="int">
+		select MAX(PRONUM) from PRODUCT where PRONAME = #{PRONAME}
 	</select>
 	
 	<insert id="insert" parameterType="ProductVO">

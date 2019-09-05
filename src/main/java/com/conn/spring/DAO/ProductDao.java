@@ -63,6 +63,9 @@ public class ProductDao {
 	public ProductVO select(int proNum) {
 		return sqlSession.selectOne("ProductDAO.select", proNum);
 	}
+	public int selectMaxNum(String proName) {
+		return sqlSession.selectOne("ProductDAO.selectMaxNum", proName);
+	}
 	
 	public void insert(ProductVO productVO) {
 		sqlSession.insert("ProductDAO.insert", productVO);

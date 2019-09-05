@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>핫핑</title>
+<title>meiB</title>
 </head>
 <body>
 <a href='<c:url value="/product/write"/>'>상품등록</a><br>
+<a href='<c:url value="/product/cart"/>'>장바구니</a><br>
 
 <a href='<c:url value="/product/main?code=${code}&sort=1"/>'>최신순</a>
 <a href='<c:url value="/product/main?code=${code}&sort=2"/>'>인기순</a>
@@ -45,8 +46,14 @@
 	</tr>
 	</c:forEach>
 </table>
+<table>
+	<c:forEach var="recent" begin="0" end="2" items="${recent}" varStatus="loop">
+		<tr>
+			<td><a href='<c:url value="/product/read/${recent.proNum}"/>'><img src="${pageContext.request.contextPath}${recent.proImg}" height="100"></a></td>
+		</tr>
+	</c:forEach>
+</table>
 </body>
-
 	<div>
 		<c:if test="${pagination.curRange ne 1 }">
 			<a href='<c:url value="/product/main?code=${code}&sort=${sort}"/>'>[처음]</a>
@@ -71,5 +78,4 @@
 			<a href='<c:url value="/product/main?code=${code}&sort=${sort}&curPage=${pageCnt}"/>'>[끝]</a> 
 		</c:if>
 	</div>
-
 </html>

@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>${productVO.proName}</title>
+<script>
+function remove(num){
+	if(confirm("상품을 삭제하시겠습니까?") == true){
+		window.location.href="../delete?proNum="+num;
+	}else {v
+		retuarn;
+	}
+}
+</script>
 </head>
 <body>
 <form method="post" action="<c:url value="/product/main/search"/>">
@@ -41,11 +50,19 @@
 	</tr>
 	<tr>
 		<td><button onclick="location.href='<c:url value=""/>'">바로구매</button></td>
-		<td><button onclick="location.href='<c:url value=""/>'">장바구니</button></td>
+		<c:choose>
+			<c:when test="${loginID.mem eq '회원'}">
+				<td><button onclick="location.href='<c:url value="/product/cartMem/${productVO.proNum}"/>'">장바구니</button></td>
+			</c:when>
+			<c:otherwise>
+				<td><button onclick="location.href='<c:url value="/product/cartNoMem/${productVO.proNum}"/>'">장바구니</button></td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
 	<tr>
 		<td>판매량 ${productVO.proSell}</td>
 		<td>재고 ${productVO.proStock}</td>
+		<td><button onclick="remove(${productVO.proNum})">상품삭제</button></td>
 	</tr>
 </table>
 
