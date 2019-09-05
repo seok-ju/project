@@ -21,6 +21,7 @@ public class FileUploadService {
 		try {
 			//파일 정보
 			String originFilename = multipartFile.getOriginalFilename();
+			if(originFilename.lastIndexOf(".") == -1) return "";
 			String extName =
 					originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
 			Long size = multipartFile.getSize();

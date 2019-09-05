@@ -76,5 +76,8 @@ function remove(num){
 	</tr>
 	</c:forEach>
 </table>
+
+<c:import url="/board/listRe?proNum=${productVO.proNum}"/>
+
 </body>
 </html>
