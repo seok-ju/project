@@ -30,4 +30,9 @@
         	WHERE ID = #{id}
         </update>
         
+        <select id="idcheck" parameterType="String" resultType="Integer">
+	      SELECT COUNT(*) FROM member WHERE id = #{id}
+		</select>
+        
+        
 </mapper>

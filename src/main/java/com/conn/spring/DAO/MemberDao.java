@@ -20,6 +20,10 @@ public class MemberDao {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 	
+	public int idcheck(String id) {
+		return sqlSessionTemplate.selectOne("idcheck", id);
+	}
+	
 	public void insert(MemberVO memberVO) {
 		sqlSessionTemplate.insert("signUp", memberVO);
 	}

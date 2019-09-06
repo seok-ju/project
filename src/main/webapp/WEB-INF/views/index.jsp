@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,16 +17,20 @@
 				<a href='#'><span>myPage</span></a>
 				<a href='#'><span>support</span></a>
 			</div>
-			<form action="#" method="post" id="loginForm">
+<% if (session.getAttribute("user") == null) { %>
+			<form action="<c:url value="/member/sign/signIn" />" method="post">
 				<div class="left-box" style="text-align: left;">	
 					<input type="text" id="id" name="id" placeholder="ID">
 					<input type="password" id="pw" name="pw" placeholder="Password">
 					<button type="submit" disabled="disabled">Sign In</button>
-					<button type="button" disabled="disabled">Sign up</button>
-					<input type="checkbox" id="keepId" name="keepId">
-					<label for="keepId"><font color="#000000">아이디 저장</font></label>
+					<a href="/member/sign/signUp"><button type="button" disabled="disabled">Sign up</button></a>
 				</div>
 			</form>
+<% } else { %>
+			<div class="left-box" style="text-align: left;">
+			${name } 님, 환영힙니다.
+			</div>
+<% } %>
 			<form action="#" method="get" id="search">
 				<div class="right-box" style="text-align: right;">	
 					<input type="text" id="word" name="word" placeholder="검색하실 단어를 입력하세요.">
