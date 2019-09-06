@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="orderDAO">
+		<select id="list" resultType="OrderVO">
+				SELECT * FROM PRODUCT
+				ORDER BY PRONUM
+		</select>
+			
+		<select id="select" parameterType="int" resultType="OrderVO">
+                SELECT * FROM
+                PRODUCT WHERE PRONUM = #{proNum}
+        </select>
+        	
+		<insert id="insert" parameterType="OrderVO">
+				INSERT INTO PRODUCT
+				(PRONUM,PRONAME, PROPRICE, PROCONTENT, PROIMG, PROTITLE, PROSTOCK, PROSELL, FLAG, PROCLASS)
+				VALUES
+				(PRODUCT_PRONUM.nextval,
+				#{proName}, #{proPrice}, #{proContent}, #{proIng}, #{proTitle}, #{proStock}, #{proSell}, #{flag}, #{proClass})
+<!-- 				 <selectKey keyProperty="BONUM" resultType="Integer">
+                        SELECT NVL(MAX(BONUM), 0) FROM BOARD
+                </selectKey> -->
+		</insert>
+		
+		<delete id="delete" parameterType="OrderVO">
+				DELETE FROM PRODUCT WHERE BONUM = #{boNum}
+				AND BOPW = #{boPw}
+		</delete>
+		
+		<update id="update" parameterType="OrderVO">
+				UPDATE PRODUCT SET PROTITLE = #{proTitle},
+				BOCONTENT = #{boContent},
+				BOIMG = #{boImg}
+				WHERE BONUM = #{boNum} AND BOPW = #{boPw}
+		</update>
+        
+</mapper>
