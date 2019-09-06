@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDAO">
+	
+	<select id="search" parameterType="String" resultType="ProductVO">
+		select * from PRODUCT where FLAG = 1 and PRONAME like '%'||#{proName}||'%' order by PRONUM
+	</select>
+	<select id="searchcnt" parameterType="String" resultType="int">
+		select count(*) from PRODUCT where FLAG = 1 and PRONAME like '%'||#{proName}||'%' order by PRONUM
+	</select>
+
+	<select id="cnt" resultType="int">
+		select count(*) from PRODUCT where FLAG = 1
+	</select>
+	<select id="list" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 order by PRONUM desc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="listPop" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 order by PROSELL desc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="listOld" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 order by PRONUM)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	
+	<select id="cnt2" resultType="int">
+		select count(*) from PRODUCT where FLAG = 1 and PRODIV = '키링'
+	</select>
+	<select id="list2" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 and PRODIV = '키링' order by PRONUM desc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="listPop2" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 and PRODIV = '키링' order by PROSELL desc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="listOld2" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 and PRODIV = '키링' order by PRONUM)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	
+	<select id="cnt3" resultType="int">
+		select count(*) from PRODUCT where FLAG = 1 and PRODIV = '케이스'
+	</select>
+	<select id="list3" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 and PRODIV = '케이스' order by PRONUM desc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="listPop3" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 and PRODIV = '케이스' order by PROSELL desc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="listOld3" parameterType="int" resultType="ProductVO">
+		select * from (select rownum rnum, pronum, proname, proprice, procontent, proimg, proimg2, protitle, prostock, 
+		prosell, flag, prodiv, proviewprice from (select * from PRODUCT where FLAG = 1 and PRODIV = '케이스' order by PRONUM)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	
+	<select id="select" parameterType="int" resultType="ProductVO">
+		select * from PRODUCT where PRONUM = #{PRONUM}
+	</select>
+	<select id="selectMaxNum" parameterType="String" resultType="int">
+		select MAX(PRONUM) from PRODUCT where PRONAME = #{PRONAME}
+	</select>
+	
+	<insert id="insert" parameterType="ProductVO">
+		insert into PRODUCT 
+		values(PRODUCT_SEQ.nextval, #{proName}, #{proPrice}, #{proContent}, #{proImg}, #{proImg2}, #{proTitle}, #{proStock}, 0, 1, #{proDiv}, #{proViewPrice})
+	</insert>
+	
+	<update id="update" parameterType="ProductVO">
+		update PRODUCT set PRONAME = #{proName}, PROCONTENT = #{proContent},
+		PROIMG = #{proImg}, PROIMG2 = #{proImg2}, PROTITLE = #{proTitle}, PROSTOCK = #{proStock} where PRONUM = #{proNum}
+	</update>
+	<update id="flag" parameterType="int">
+		update PRODUCT set FLAG = 0 where PRONUM = #{proNum}
+	</update>
+	
+	<update id="change" parameterType="hashmap">
+		update BOARD set PRONUM = #{newNum} where PRONUM = #{oldNum}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from PRODUCT where PRONUM = #{PRONUM}
+	</delete>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+
+	<select id="cntRe" resultType="int">
+		select count(*) from BOARD where BODIV = '후기'
+	</select>
+	<select id="listRe" parameterType="int" resultType="BoardVO">
+		select * from (select rownum rnum, bonum, pronum, num, boref, bostep, boid, botitle, bocontent, bopw, bodiv, boimg, bodate 
+		from (select * from BOARD where BODIV = '후기' order by BOREF desc, BOSTEP asc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="cntProRe" parameterType="int" resultType="int">
+		select count(*) from BOARD where BODIV = '후기' and PRONUM = #{proNum}
+	</select>
+	<select id="listProRe" parameterType="hashmap" resultType="BoardVO">
+		select * from (select rownum rnum, bonum, pronum, num, boref, bostep, boid, botitle, bocontent, bopw, bodiv, boimg, bodate 
+		from (select * from BOARD where BODIV = '후기' and PRONUM = #{proNum} order by BOREF desc, BOSTEP asc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+
+	<select id="cntQu" resultType="int">
+		select count(*) from BOARD where BODIV = '문의'
+	</select>
+	<select id="listQu" parameterType="int" resultType="BoardVO">
+		select * from (select rownum rnum, bonum, pronum, num, boref, bostep, boid, botitle, bocontent, bopw, bodiv, boimg, bodate 
+		from (select * from BOARD where BODIV = '문의' order by BOREF desc, BOSTEP asc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+	<select id="cntProQu" parameterType="int" resultType="int">
+		select count(*) from BOARD where BODIV = '문의' and PRONUM = #{proNum}
+	</select>
+	<select id="listProQu" parameterType="hashmap" resultType="BoardVO">
+		select * from (select rownum rnum, bonum, pronum, num, boref, bostep, boid, botitle, bocontent, bopw, bodiv, boimg, bodate 
+		from (select * from BOARD where BODIV = '문의' and PRONUM = #{proNum} order by BOREF desc, BOSTEP asc)) where <![CDATA[rnum > #{start} and rnum <= (#{start}+10)]]>
+	</select>
+
+	<select id="read" parameterType="int" resultType="BoardVO">
+		select * from BOARD where BONUM = #{boNum}	
+	</select>
+
+	<insert id="insert" parameterType="BoardVO">
+		insert into BOARD values (BOARD_SEQ.nextval, #{proNum}, #{num}, BOARD_SEQ.nextval, #{boStep},	
+		#{boId}, #{boTitle}, #{boContent}, #{boPw}, #{boDiv}, #{boImg}, sysdate)
+	</insert>
+	<insert id="insertRe" parameterType="BoardVO">
+		insert into BOARD values (BOARD_SEQ.nextval, #{proNum}, #{num}, #{boRef}, #{boStep},	
+		#{boId}, #{boTitle}, #{boContent}, #{boPw}, #{boDiv}, #{boImg}, sysdate)
+	</insert>
+
+	<update id="edit" parameterType="BoardVO">
+		update BOARD set BOTITLE = #{boTitle}, BOCONTENT = #{boContent}, BOIMG = #{boImg}
+		where BONUM = #{boNum}
+	</update>
+
+	<delete id="delete" parameterType="BoardVO">
+		delete * from BOARD where BONUM = #{boNum} and BOPW = #{boPw}
+	</delete>
+</mapper>
