@@ -24,6 +24,8 @@ public class BoardController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
+	
+	//후기
 	@RequestMapping(value="/board/listRe")
 	public String listRe(Model model,
 			@RequestParam(defaultValue="0")int proNum,
@@ -44,6 +46,7 @@ public class BoardController {
 		
 		if(proNum != 0) board = boardService.listProRe(map);
 		
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("pagination", paging);
 		model.addAttribute("proNum", proNum);
 		model.addAttribute("list", board);
@@ -100,6 +103,81 @@ public class BoardController {
 		String url = fileUploadService.restore(file);
 		
 		boardVO.setBoImg(url);
+		
+		boardService.edit(boardVO);
+		
+		return "redirect:/product/read/"+origin.getProNum();
+	}
+	
+	//문의
+	@RequestMapping(value="/board/listQu")
+	public String listQu(Model model,
+			@RequestParam(defaultValue="0")int proNum,
+			@RequestParam(defaultValue="1") int curPage) {
+		int cnt = boardService.cntQu();
+		
+		if(proNum != 0) cnt = boardService.cntProQu(proNum);
+
+		PagingService paging = new PagingService(cnt, curPage);
+		
+		int start = paging.getStartIndex();
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("proNum", proNum);
+		
+		List<BoardVO> board = boardService.listQu(start);
+		
+		if(proNum != 0) board = boardService.listProQu(map);
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("pagination", paging);
+		model.addAttribute("proNum", proNum);
+		model.addAttribute("list", board);
+		return "/board/listQu";
+	}
+	
+	@RequestMapping(value="/board/writeQu", method=RequestMethod.GET)
+	public String writeQu(Model model, int proNum,
+			@RequestParam(defaultValue = "0") int boRef) {
+		model.addAttribute("proNum", proNum);
+		model.addAttribute("boRef", boRef);
+		return "/board/writeQu";
+	}
+	
+	@RequestMapping(value="/board/writeQu", method=RequestMethod.POST)
+	public String writeQu(Model model, BoardVO boardVO) {
+		if(boardVO.getBoRef() != 0) {
+			boardVO.setBoStep(1);
+			boardVO.setBoId("관리자");
+			boardVO.setNum(99);
+			boardVO.setBoImg("");
+			boardService.writeRe(boardVO);
+			return "redirect:/product/read/"+boardVO.getProNum();
+		}
+		
+		boardVO.setBoId("test");
+		boardVO.setNum(1);
+		boardVO.setBoImg("");
+		
+		boardService.write(boardVO);
+		
+		return "redirect:/product/read/"+boardVO.getProNum();
+	}
+	
+	@RequestMapping(value="/board/modifyQu", method=RequestMethod.GET)
+	public String modifyQu(Model model, int boNum) {
+		model.addAttribute("boardVO", boardService.read(boNum));
+		return "/board/modifyQu";
+	}
+	
+	@RequestMapping(value="/board/modifyQu", method=RequestMethod.POST)
+	public String modifyQu(Model model, BoardVO boardVO, String pass) {
+		
+		BoardVO origin = boardService.read(boardVO.getBoNum());
+		if(!origin.getBoPw().equals(pass)) {
+			return "redirect:/board/modifyQu?boNum="+boardVO.getBoNum();
+		}
 		
 		boardService.edit(boardVO);
 		

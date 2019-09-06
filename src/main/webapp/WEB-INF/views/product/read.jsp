@@ -10,8 +10,8 @@
 function remove(num){
 	if(confirm("상품을 삭제하시겠습니까?") == true){
 		window.location.href="../delete?proNum="+num;
-	}else {v
-		retuarn;
+	}else {
+		return;
 	}
 }
 </script>
@@ -68,6 +68,15 @@ function remove(num){
 
 <table>
 	<tr>
+		<td><button onclick="location.href='#info'">상품상세정보</button></td>
+		<td><button onclick="location.href='#re'">상품구매후기</button></td>
+		<td><button onclick="location.href='#qu'">상품문의</button></td>
+	</tr>
+</table><br>
+
+<div id="info">
+<table>
+	<tr>
 		<td colspan="2'">${productVO.proContent}</td>
 	</tr>
 	<c:forEach var="img" items="${img}">
@@ -76,8 +85,32 @@ function remove(num){
 	</tr>
 	</c:forEach>
 </table>
+</div>
+<br><br>
 
-<c:import url="/board/listRe?proNum=${productVO.proNum}"/>
+<table>
+	<tr>
+		<td><button onclick="location.href='#info'">상품상세정보</button></td>
+		<td><button onclick="location.href='#re'">상품구매후기</button></td>
+		<td><button onclick="location.href='#qu'">상품문의</button></td>
+	</tr>
+</table><br>
 
+<div id="re">
+<c:import url="/board/listRe?proNum=${productVO.proNum}&curPage=${rePage}"/>
+<br><br>
+</div>
+
+<table>
+	<tr>
+		<td><button onclick="location.href='#info'">상품상세정보</button></td>
+		<td><button onclick="location.href='#re'">상품구매후기</button></td>
+		<td><button onclick="location.href='#qu'">상품문의</button></td>
+	</tr>
+</table><br>
+
+<div id="qu">
+<c:import url="/board/listQu?proNum=${productVO.proNum}&curPage=${quPage}"/>
+</div>
 </body>
 </html>

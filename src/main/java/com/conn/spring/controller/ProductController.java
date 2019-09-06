@@ -2,6 +2,7 @@ package com.conn.spring.controller;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -103,7 +104,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/product/read/{proNum}")
-	public String read(Model model, 
+	public String read(Model model,
+			@RequestParam(defaultValue="1")int rePage,
+			@RequestParam(defaultValue="1")int quPage,
 			@PathVariable int proNum,
 			@CookieValue(value="recent", required=false)Cookie cookie,
 			HttpServletResponse response) {
@@ -126,6 +129,8 @@ public class ProductController {
 		
 		int point = productVO.getProPrice()/100;
 		String[] img = productVO.getProImg2().split("\\+");
+		model.addAttribute("rePage", rePage);
+		model.addAttribute("quPage", quPage);
 		model.addAttribute("img", img);
 		model.addAttribute("point", point);
 		model.addAttribute("productVO", productVO);
@@ -212,6 +217,13 @@ public class ProductController {
 		productVO.setProPrice(price);
 		
 		productService.priceChange(productVO, proNum);
+		int maxNum = productService.selectMaxNum(productVO.getProName());
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("oldNum", proNum);
+		map.put("newNum", maxNum);
+		
+		productService.changeProNum(map);
 		
 		return "redirect:/product/main";
 	}

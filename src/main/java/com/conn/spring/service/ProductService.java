@@ -1,6 +1,7 @@
 package com.conn.spring.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,9 @@ public class ProductService {
 	}
 	public void priceChange(ProductVO productVO, int proNum) {
 		productDao.priceChange(productVO, proNum);
+	}
+	public void changeProNum(Map<String, Integer>map) {
+		productDao.changeProNum(map);
 	}
 	
 	public void delete(int proNum) {

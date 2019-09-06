@@ -1,6 +1,7 @@
 package com.conn.spring.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,10 @@ public class ProductDao {
 	}
 	public void priceChange(ProductVO productVO, int proNum) {
 		insert(productVO);
-		sqlSession.update("flag", proNum);
+		sqlSession.update("ProductDAO.flag", proNum);
+	}
+	public void changeProNum(Map<String, Integer>map) {
+		sqlSession.update("ProductDAO.change", map);
 	}
 	
 	public void delete(int proNum) {

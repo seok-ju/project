@@ -79,6 +79,10 @@
 		update PRODUCT set FLAG = 0 where PRONUM = #{proNum}
 	</update>
 	
+	<update id="change" parameterType="hashmap">
+		update BOARD set PRONUM = #{newNum} where PRONUM = #{oldNum}
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		delete from PRODUCT where PRONUM = #{PRONUM}
 	</delete>
