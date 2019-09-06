@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hostBoardDao">
+	<select id="listFAQ" parameterType="int" resultType="boardVo">
+		select * from (select rownum rnum, HONUM, HOCLASS, HOTITLE, HOCONTENT, HODATE from
+		(select * from HOSTBOARD where HOCLASS = 1 order by HONUM desc))
+		where <![CDATA[rnum > #{startIndex} and rnum <= (#{startIndex}+10)]]>
+	</select>
+	
+	<select id="listNO" parameterType="int" resultType="boardVo">
+		select * from (select rownum rnum, HONUM, HOCLASS, HOTITLE, HOCONTENT, HODATE from
+		(select * from HOSTBOARD where HOCLASS = 2 order by HONUM desc))
+		where <![CDATA[rnum > #{startIndex} and rnum <= (#{startIndex}+10)]]>
+	</select>
+	
+	<select id="listCntFAQ" resultType="int">
+		select count(*) from HOSTBOARD where HOCLASS=1
+	</select>
+	
+	<select id="listCntNO" resultType="int">
+		select count(*) from HOSTBOARD where HOCLASS=2
+	</select>
+	
+	<select id="content" parameterType="int" resultType="boardVo">
+		select * from HOSTBOARD where HONUM = #{honum}
+	</select>
+		
+	<insert id="insert" parameterType="boardVo">
+		insert into HOSTBOARD
+		(HONUM, HOCLASS, HOTITLE, HOCONTENT, HODATE)
+		values
+		(HOST_SEQ.nextval, #{hoclass}, #{hotitle}, #{hocontent}, sysdate)
+	</insert>
+	
+	<update id="update" parameterType="boardVo">
+		update HOSTBOARD set 
+		HOTITLE = #{hotitle}, HOCONTENT = #{hocontent}
+		where HONUM = #{honum}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from HOSTBOARD where HONUM = #{honum}
+	</delete>
+</mapper>
