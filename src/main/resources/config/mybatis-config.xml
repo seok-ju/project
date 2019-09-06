@@ -9,14 +9,7 @@
 		<setting name="useGeneratedKeys" value="false" />
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-<<<<<<< HEAD
-=======
-	
-	<typeAliases>
-		<package name="com.conn.spring.VO"/>
-	</typeAliases>
->>>>>>> origin/choi
-	
+
 	<typeAliases>
 		<package name="com.conn.spring.VO"/>
 	</typeAliases>

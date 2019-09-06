@@ -22,19 +22,19 @@ public class OrderVoDao {
 		}
 		
 		public List<OrderVO> list(){
-				return sqlSessionTemplate.selectList("list");
+				return sqlSessionTemplate.selectList("orderDAO.list");
 		}
 		public int delete(OrderVO orderVO) {
-				return sqlSessionTemplate.delete("delete", orderVO);
+				return sqlSessionTemplate.delete("orderDAO.delete", orderVO);
 		}
 		public int update(OrderVO orderVO) {
-				return sqlSessionTemplate.update("update", orderVO);
+				return sqlSessionTemplate.update("orderDAO.update", orderVO);
 		}
 		public void insert(OrderVO orderVO) {
-				 sqlSessionTemplate.insert("insert", orderVO);
+				 sqlSessionTemplate.insert("orderDAO.insert", orderVO);
 		}
 		public OrderVO select(int ProNum) {
-			OrderVO vo = (OrderVO) sqlSessionTemplate.selectOne("select", ProNum);
+			OrderVO vo = (OrderVO) sqlSessionTemplate.selectOne("orderDAO.select", ProNum);
 				return vo;
 		}
 		

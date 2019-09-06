@@ -14,34 +14,34 @@ public class HostBoardDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	public List<HostBoardVo> listFAQ(int startIndex){
-		return sqlSessionTemplate.selectList("listFAQ", startIndex);
+		return sqlSessionTemplate.selectList("hostBoardDao.listFAQ", startIndex);
 	}
 	
 	public List<HostBoardVo> listNO(int startIndex){
-		return sqlSessionTemplate.selectList("listNO", startIndex);
+		return sqlSessionTemplate.selectList("hostBoardDao.listNO", startIndex);
 	}
 	
 	public List<HostBoardVo> content(int honum){
-		return sqlSessionTemplate.selectList("content", honum);
+		return sqlSessionTemplate.selectList("hostBoardDao.content", honum);
 	}
 	
 	public int listCntFAQ() {
-		return sqlSessionTemplate.selectOne("listCntFAQ");
+		return sqlSessionTemplate.selectOne("hostBoardDao.listCntFAQ");
 	}
 	
 	public int listCntNO() {
-		return sqlSessionTemplate.selectOne("listCntNO");
+		return sqlSessionTemplate.selectOne("hostBoardDao.listCntNO");
 	}
 	
 	public int insert(HostBoardVo vo){
-		return sqlSessionTemplate.insert("insert", vo);
+		return sqlSessionTemplate.insert("hostBoardDao.insert", vo);
 	}
 	
 	public int update(HostBoardVo vo) {
-		return sqlSessionTemplate.update("update", vo);
+		return sqlSessionTemplate.update("hostBoardDao.update", vo);
 	}
 	
 	public int delete(int honum) {
-		return sqlSessionTemplate.delete("delete", honum);
+		return sqlSessionTemplate.delete("hostBoardDao.delete", honum);
 	}
 }

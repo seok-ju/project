@@ -14,13 +14,8 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-<<<<<<< HEAD
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.60.129:1521:orcl" />
-		<property name="user" value="c##tester" />
-=======
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-		<property name="user" value="c##mango" />
->>>>>>> origin/choi
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.44.128:1521:orcl" />
+		<property name="user" value="c##tester2" />
 		<property name="password" value="1234" />
 		<property name="maxPoolSize" value="100" />
 		<property name="maxIdleTime" value="600" />
@@ -41,9 +36,6 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
 		destroy-method="clearCache">
 		<constructor-arg ref="sqlSessionFactory" />
-<<<<<<< HEAD
-	</bean>			
-=======
 	</bean>
 	
 	<!-- 멀티파트 리졸버 -->
@@ -62,5 +54,4 @@
 			<value>C:\Users\KGITBANK24\Desktop\upload</value>
 		</constructor-arg>
 	</bean> -->
->>>>>>> origin/choi
 </beans>

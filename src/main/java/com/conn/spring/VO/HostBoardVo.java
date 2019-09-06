@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("boardVo")
+@Alias("HostVO")
 public class HostBoardVo {
 	private int honum;
 	private int hoclass;
