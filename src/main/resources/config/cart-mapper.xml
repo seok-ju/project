@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CartDAO">
+	<select id="select" parameterType="int" resultType="CartVO">
+		select * from CART where NUM = #{num}
+	</select>
+	
+	<insert id="insert" parameterType="CartVO">
+		insert into CART values (#{num}, #{cid}, #{cnum})
+	</insert>
+	
+	<update id="update" parameterType="CartVO">
+		update CART set CNUM = #{cnum} where NUM = #{num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from CART where NUM = #{num}
+	</delete>	
+</mapper>

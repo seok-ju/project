@@ -21,20 +21,20 @@ public class MemberDao {
 	}
 	
 	public int idcheck(String id) {
-		return sqlSessionTemplate.selectOne("MemberVO.idcheck", id);
+		return sqlSessionTemplate.selectOne("MemberDao.idcheck", id);
 	}
 	
 	public void insert(MemberVO memberVO) {
-		sqlSessionTemplate.insert("MemberVO.signUp", memberVO);
+		sqlSessionTemplate.insert("MemberDao.signUp", memberVO);
 	}
 	public void delete(MemberVO memberVO) {
-		sqlSessionTemplate.delete("MemberVO.signDown", memberVO);
+		sqlSessionTemplate.delete("MemberDao.signDown", memberVO);
 	}
 	public MemberVO selectOne(String id) {
-		return sqlSessionTemplate.selectOne("MemberVO.info", id);
+		return sqlSessionTemplate.selectOne("MemberDao.info", id);
 	}
 	public List<MemberVO> selectAll() {
-		return sqlSessionTemplate.selectList("MemberVO.list");
+		return sqlSessionTemplate.selectList("MemberDao.list");
 	}
 		
 	

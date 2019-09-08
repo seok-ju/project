@@ -15,6 +15,10 @@
 		<td><input type="text" name="boTitle" value="${boardVO.boTitle}"></td>
 	</tr>
 	<tr>
+		<th>작성자</th>
+		<td>${user.id}</td>
+	</tr>
+	<tr>
 		<th>내용</th>
 		<td><textarea name="boContent" rows="13" cols="50" style="resize:none">${boardVO.boContent}</textarea></td>
 	</tr>

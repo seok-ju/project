@@ -9,7 +9,7 @@
 <script>
 function remove(num){
 	if(confirm("상품을 삭제하시겠습니까?") == true){
-		window.location.href="../delete?proNum="+num;
+		document.location.href="../delete?proNum="+num;
 	}else {
 		return;
 	}
@@ -21,7 +21,9 @@ function remove(num){
 	<input type="text" name="search"> <input type="submit" value="상품검색">
 </form>
 <a href='<c:url value="/product/main"/>'>목록</a>
+<c:if test="${user.mem eq '관리자'}">
 <a href='<c:url value="/product/modify/${productVO.proNum}"/>'>수정</a>
+</c:if>
 <table>
 	<tr>
 		<th rowspan="7"><img src="${pageContext.request.contextPath}${productVO.proImg}" height="400"></th>
@@ -51,19 +53,21 @@ function remove(num){
 	<tr>
 		<td><button onclick="location.href='<c:url value=""/>'">바로구매</button></td>
 		<c:choose>
-			<c:when test="${loginID.mem eq '회원'}">
-				<td><button onclick="location.href='<c:url value="/product/cartMem/${productVO.proNum}"/>'">장바구니</button></td>
+			<c:when test="${user.mem eq '회원'}">
+				<td><button onclick="location.href='<c:url value="/product/cartMem/${productVO.proNum}"/>'">장바뀨니</button></td>
 			</c:when>
 			<c:otherwise>
 				<td><button onclick="location.href='<c:url value="/product/cartNoMem/${productVO.proNum}"/>'">장바구니</button></td>
 			</c:otherwise>
 		</c:choose>
 	</tr>
+	<c:if test="${user.mem eq '관리자'}">
 	<tr>
 		<td>판매량 ${productVO.proSell}</td>
 		<td>재고 ${productVO.proStock}</td>
 		<td><button onclick="remove(${productVO.proNum})">상품삭제</button></td>
 	</tr>
+	</c:if>
 </table>
 
 <table>

@@ -35,13 +35,15 @@
 	</tr>
 	<tr id="${loop.index+10000000}" style="display:none">
 		<td colspan="3">${board.boContent}<br>
-		<button onclick="location.href='<c:url value="/board/writeQu?proNum=${board.proNum}&boRef=${board.boRef}"/>'">답글</button>
+		<c:if test="${user.mem eq '관리자'}">
+		<button onclick="location.href='<c:url value="/board/writeQu?proNum=${board.proNum}&boRef=${board.boRef}"/>'">답글</button></c:if>
+		<c:if test="${user.mem eq '회원'}">
 		<button onclick="location.href='<c:url value="/board/modifyQu?boNum=${board.boNum}"/>'">수정</button>
-		<button onclick="location.href='<c:url value=""/>'">삭제</button></td>
+		<button onclick="location.href='<c:url value=""/>'">삭제</button></c:if></td>
 	</tr>
 </c:forEach>
 </table>
-<c:if test="${proNum ne 0}">
+<c:if test="${proNum ne 0 && user.mem eq '회원'}">
 	<button onclick="location.href='<c:url value="/board/writeQu?proNum=${proNum}"/>'">문의 작성</button>
 </c:if>
 <c:choose>

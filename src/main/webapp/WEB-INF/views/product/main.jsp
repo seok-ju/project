@@ -8,7 +8,11 @@
 <title>meiB</title>
 </head>
 <body>
-<a href='<c:url value="/product/write"/>'>상품등록</a><br>
+<a href='<c:url value="/member/sign/signIn"/>'>로그인</a><br>
+
+<c:if test="${user.mem eq '관리자'}">
+	<button onclick="location.href='<c:url value="/product/write"/>'">상품등록</button><br>
+</c:if>
 <a href='<c:url value="/product/cart"/>'>장바구니</a><br>
 
 <a href='<c:url value="/product/main?code=${code}&sort=1"/>'>최신순</a>
@@ -41,7 +45,10 @@
 	</tr>
 	<tr>
 		<c:forEach begin="${status.index}" end="${status.index+4}" var="product" items="${allList}" varStatus="loop">
-			<td>${product.proViewPrice}<button onclick="window.open('<c:url value="/product/price/${product.proNum}"/>')">가격변경</button></td>
+			<td>${product.proViewPrice}
+			<c:if test="${user.mem eq '관리자'}">
+			<button onclick="window.open('<c:url value="/product/price/${product.proNum}"/>')">가격변경</button>
+			</c:if></td>
 		</c:forEach>
 	</tr>
 	</c:forEach>

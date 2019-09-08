@@ -24,6 +24,12 @@
 		</c:choose></td>
 	</tr>
 	<tr>
+		<th>작성자</th>
+		<td>${user.id}</td>
+		<input type="hidden" name="boId" value="${user.id}">
+		<input type="hidden" name="num" value="${user.num}">
+	<tr>
+	<tr>
 		<th>내용</th>
 		<td><textarea name="boContent" rows="13" cols="50" style="resize:none" required></textarea></td>
 	</tr>

@@ -3,6 +3,8 @@ package com.conn.spring.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,7 +69,6 @@ public class BoardController {
 		if(boardVO.getBoRef() != 0) {
 			boardVO.setBoStep(1);
 			boardVO.setBoId("관리자");
-			boardVO.setNum(99);
 			boardVO.setBoImg("");
 			boardService.writeRe(boardVO);
 			return "redirect:/product/read/"+boardVO.getProNum();
@@ -75,8 +76,6 @@ public class BoardController {
 		
 		String url = fileUploadService.restore(file);
 		
-		boardVO.setBoId("test");
-		boardVO.setNum(1);
 		boardVO.setBoImg(url);
 		
 		boardService.write(boardVO);
@@ -146,18 +145,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/writeQu", method=RequestMethod.POST)
-	public String writeQu(Model model, BoardVO boardVO) {
+	public String writeQu(Model model, BoardVO boardVO, HttpSession session) {
 		if(boardVO.getBoRef() != 0) {
 			boardVO.setBoStep(1);
 			boardVO.setBoId("관리자");
-			boardVO.setNum(99);
 			boardVO.setBoImg("");
 			boardService.writeRe(boardVO);
 			return "redirect:/product/read/"+boardVO.getProNum();
 		}
 		
-		boardVO.setBoId("test");
-		boardVO.setNum(1);
 		boardVO.setBoImg("");
 		
 		boardService.write(boardVO);

@@ -45,13 +45,13 @@ public class MemberSignService {
 	}
 	
 	// 메일 인증
-	public ModelAndView emailAuth(String email) {
-		Random rd = new Random();
-		String authNum = "";
-		authNum = Integer.toString((rd.nextInt(99998) + 1));
-		sendEmail(email, authNum);
-		return ;
-	}
+//	public ModelAndView emailAuth(String email) {
+//		Random rd = new Random();
+//		String authNum = "";
+//		authNum = Integer.toString((rd.nextInt(99998) + 1));
+//		sendEmail(email, authNum);
+//		return ;
+//	}
 	private void sendEmail(String email, String authNum) {
 		String host = "smtp.naver.com";
 		String user = "ssohirokr@naver.com";

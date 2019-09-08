@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -228,68 +229,20 @@ public class ProductController {
 		return "redirect:/product/main";
 	}
 	
-	@RequestMapping(value="/product/cart")
-	public String cart(Model model,
-			@CookieValue(value="cart", required=false)Cookie cookie) {
-		
-		List<ProductVO> list = new ArrayList<ProductVO>();
-		
-		int price = 0;
-		if(cookie != null) {
-			String[] product = cookie.getValue().split("\\+");
-			for(int i=0; i<product.length; i++) {
-				ProductVO productVO = productService.select(Integer.parseInt(product[i]));
-				price += productVO.getProPrice();
-				list.add(productVO);
-			}
-		}
-		
-		String viewPrice = NumberFormat.getInstance().format(price);
-		model.addAttribute("price", viewPrice);
-		model.addAttribute("cnt", list.size());
-		model.addAttribute("cartList", list);
-		
-		return "/product/cart";
-	}
-	
-	
-	@RequestMapping(value="/product/cartNoMem/{proNum}")
-	public String cartNoMem(Model model, 
-			@CookieValue(value="cart", required=false)Cookie cookie,
+	@RequestMapping(value="/product/delete")
+	public String delete(
+			@CookieValue(value="recent", required = false)Cookie cookie,
 			HttpServletResponse response,
-			@PathVariable String proNum) {
-
-		if(cookie != null) proNum += "+" + cookie.getValue();
+			int proNum) {
 		
-		Cookie cartCookie = new Cookie("cart", proNum);
-		cartCookie.setPath("/");
-		cartCookie.setMaxAge(60*60*24);
-		
-		response.addCookie(cartCookie);
-		
-		return "redirect:/product/cart";
-	}
-	
-	@RequestMapping(value="/product/cartDelete")
-	public String cartDelete(
-			@CookieValue(value="cart", required=false)Cookie cookie,
-			HttpServletResponse response
-			) {
+		productService.delete(proNum);
 		
 		if(cookie != null) {
-			cookie = new Cookie("cart", "");
+			cookie = new Cookie("recent", "");
 			cookie.setPath("/");
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		
-		return "redirect:/product/main";		
-	}
-	
-	@RequestMapping(value="/product/delete")
-	public String delete(int proNum) {
-		
-		productService.delete(proNum);
 		
 		return "redirect:/product/main";
 	}

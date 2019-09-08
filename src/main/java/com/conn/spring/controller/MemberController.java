@@ -46,13 +46,13 @@ public class MemberController {
     }
     
     // 메일 인증
-    @RequestMapping(value = "/emailAuth")
-    public String emailAuth(HttpServletRequest req) {
-    	String email = req.getParameter("email_1") + "@" + req.getParameter("email_2");
-    	memberSignService.emailAuth(email);
-    	
-    	return "/emailAuth";
-    }
+//    @RequestMapping(value = "/emailAuth")
+//    public String emailAuth(HttpServletRequest req) {
+//    	String email = req.getParameter("email_1") + "@" + req.getParameter("email_2");
+//    	memberSignService.emailAuth(email);
+//    	
+//    	return "/emailAuth";
+//    }
 
     @RequestMapping(value="/member/sign/signIn", method=RequestMethod.GET)
     public String signInGET() {
