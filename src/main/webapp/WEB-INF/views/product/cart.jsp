@@ -42,6 +42,6 @@
 </c:choose>
 	<button onclick="location.href='<c:url value="/product/main"/>'">쇼핑계속하기</button>
 	<button onclick="location.href='<c:url value="/product/cartDelete"/>'">장바구니 비우기</button>
-	<button onclick="location.href='<c:url value="#"/>'">상품주문하기</button>
+	<button onclick="location.href='<c:url value="/cart/order"/>'">상품주문하기</button>
 </body>
 </html>

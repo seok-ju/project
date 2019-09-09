@@ -163,31 +163,26 @@ document.add.extraAddress.value =extraAddress;
 	</tr>
 	</table>
 	<table>
-	<tr>
-			<c:forEach var="order" items="${cartList}" varStatus="loop">
-						<tr>
-						
-	<td rowspan="6"><img src="${pageContext.request.contextPath}${order.proImg}" width="200"></td>
-	
-	</tr>
-	<tr>
-				<th>상품이름 :</th>
-				<td>${order.proName}</td>
-			</tr>
-	<tr>
-	<tr>
-				<th>상품번호 :</th>
-				<td>${order.proNum}</td>
-			</tr><tr>
-				<th>상품 수 :</th>
-				<td>1</td>
-			</tr><tr>
-				<th>가격 :</th>
-				<td>${order.proPrice}</td>
-			</tr>
+		<c:forEach var="order" items="${orderList}" varStatus="loop">
+		<tr>			
+			<td rowspan="4"><img src="${pageContext.request.contextPath}${order.proImg}" width="200"></td>
+			<th>상품이름 :</th>
+			<td>${order.proName}</td>
+		</tr>
+		<tr>
+			<th>상품번호 :</th>
+			<td>${order.proNum}</td>
+		</tr>
+		<tr>
+			<th>상품 수 :</th>
+			<td>1</td>
+		</tr>
+		<tr>
+			<th>가격 :</th>
+			<td>${order.proViewPrice}</td>
+		</tr>
 		</c:forEach>
-	<tr> <td><b>가격 ${p}원 배송료 0원  총가격 = ${p}원</b></td></tr>
-	
+	<tr><td><b>가격 ${totalPrice}원 배송료 0원  총가격 = ${totalPrice}원</b></td></tr>
 	</table>
 	<br>
 	<table>
@@ -202,7 +197,7 @@ document.add.extraAddress.value =extraAddress;
 	<tr>
 		<td><span id="guide" style="color:#999;display:none"></span></td>
 		<td><input type="text" id="sample4_roadAddress" placeholder="도로명주소" value = "${addr2}"></td>
-		<td><input type="text" id="sample4_detailAddress" placeholder="상세주소"></td>
+		<td><input type="text" id="sample4_detailAddress" placeholder="상세주소" value="${addr3}"></td>
 		<td><input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
 	</tr>
 </table>
@@ -232,7 +227,7 @@ document.add.extraAddress.value =extraAddress;
 		<tr><th>결제예정금액-</th><th>적립금 사용-</th><th>총 결제 금액</th><tr>
 		<tr><th>결제예정금액-</th><th>적립금 사용-</th><th>총 결제 금액</th><tr>
 		
-		<td><input type="button" onclick="sample4(${p})" value="결제하기"><br></td>
+		<td><input type="button" onclick="sample4(${totalPrice})" value="결제하기"><br></td>
 	</table>
 	</form>
 </body>

@@ -123,4 +123,46 @@ public class CartController {
 		
 		return "redirect:/product/main";		
 	}
+	
+	@RequestMapping(value="/cart/order")
+	public String orderCart(Model model,
+			@CookieValue(value="cart", required=false) Cookie cookie,
+			HttpSession session) {
+		CartVO cartVO = null;
+		String[] addr = null;
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		if(member != null) {
+			addr = member.getAddr().split("\\+");
+			model.addAttribute("member", member);
+			model.addAttribute("addr1", addr[0]);
+			model.addAttribute("addr2", addr[1]);
+			model.addAttribute("addr3", addr[2]);
+			cartVO = cartService.select(member.getNum());
+		}
+		
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		
+		int price = 0;
+		
+		if(cookie != null) {
+			String[] product = cookie.getValue().split("\\+");
+			for(int i=0; i<product.length; i++) {
+				ProductVO productVO = productService.select(Integer.parseInt(product[i]));
+				price += productVO.getProPrice();
+				list.add(productVO);
+			}
+		}else if(cartVO != null) {
+			String[] product = cartVO.getCnum().split("\\+");
+			for(int i=0; i<product.length; i++) {
+				ProductVO productVO = productService.select(Integer.parseInt(product[i]));
+				price += productVO.getProPrice();
+				list.add(productVO);
+			}
+		}
+		model.addAttribute("orderList", list);
+		model.addAttribute("totalPrice", price);
+		
+		return "/board/order";
+	}
+	
 }

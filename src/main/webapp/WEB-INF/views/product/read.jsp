@@ -51,7 +51,7 @@ function remove(num){
 		<td>${productVO.proNum}</td>
 	</tr>
 	<tr>
-		<td><button onclick="location.href='<c:url value=""/>'">바로구매</button></td>
+		<td><button onclick="location.href='<c:url value="/product/order/${productVO.proNum}"/>'">바로구매</button></td>
 		<c:choose>
 			<c:when test="${user.mem eq '회원'}">
 				<td><button onclick="location.href='<c:url value="/product/cartMem/${productVO.proNum}"/>'">장바뀨니</button></td>

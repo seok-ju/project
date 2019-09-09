@@ -7,9 +7,9 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.conn.spring.VO.CartVO;
+import com.conn.spring.VO.MemberVO;
 import com.conn.spring.VO.ProductVO;
 import com.conn.spring.service.FileUploadService;
 import com.conn.spring.service.PagingService;
@@ -245,6 +247,32 @@ public class ProductController {
 		}
 		
 		return "redirect:/product/main";
+	}
+	
+	// 주문창 연결
+	@RequestMapping(value="/product/order/{proNum}")
+	public String order(Model model,
+		@PathVariable int proNum,
+		HttpSession session){
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		String[] addr = null;
+		if(member != null) {
+			addr = member.getAddr().split("\\+");
+		}
+		
+		List<ProductVO> orderList = new ArrayList<ProductVO>();
+		orderList.add(productService.select(proNum));
+		
+		if(member != null) {
+			model.addAttribute("member", member);
+			model.addAttribute("addr1", addr[0]);
+			model.addAttribute("addr2", addr[1]);
+			model.addAttribute("addr3", addr[2]);
+		}
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("totalPrice", orderList.get(0).getProPrice());
+		
+		return "/board/order";
 	}
 	
 }
