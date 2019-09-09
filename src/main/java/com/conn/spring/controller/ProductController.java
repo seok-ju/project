@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.conn.spring.VO.CartVO;
 import com.conn.spring.VO.MemberVO;
 import com.conn.spring.VO.ProductVO;
 import com.conn.spring.service.FileUploadService;

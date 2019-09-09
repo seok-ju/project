@@ -19,5 +19,9 @@ public class MemberInfoService {
 	public List<MemberVO> memberInfoList() {
 		return memberDao.selectAll();
 	}
+	// 로그인 , 인포
+	public MemberVO Info(String id) {
+		return memberDao.selectOne(id);
+	}
 }
 

@@ -1,22 +1,8 @@
 package com.conn.spring.service;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
-import java.util.Random;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.conn.spring.DAO.MemberDao;
 import com.conn.spring.VO.MemberVO;
@@ -32,9 +18,10 @@ public class MemberSignService {
 	public void setMemberDao(MemberDao memberDao) {	this.memberDao = memberDao;	}
 	
 	// 회원가입
-	public void signUp(MemberVO memberVO) {
-		memberDao.insert(memberVO);
-	}
+//	public void signUp(MemberVO memberVO) {
+//		memberDao.insert(memberVO);
+//	}
+	
 	public void signDown(MemberVO memberVO) {
 		memberDao.delete(memberVO);
 	}
@@ -44,76 +31,39 @@ public class MemberSignService {
 		return memberDao.selectOne(id);
 	}
 	
-	// 메일 인증
-//	public ModelAndView emailAuth(String email) {
-//		Random rd = new Random();
-//		String authNum = "";
-//		authNum = Integer.toString((rd.nextInt(99998) + 1));
-//		sendEmail(email, authNum);
-//		return ;
-//	}
-	private void sendEmail(String email, String authNum) {
-		String host = "smtp.naver.com";
-		String user = "ssohirokr@naver.com";
-		String password = "Ss5668792";    
+	public void signUp(MemberVO vo) throws Exception {
+		
+		memberDao.insert(vo);
+        String key = new TempKeyService().getKey(50,false);  // 인증키 생성
 
-		String subject = "meiB 인증번호 전달";
-		String fromName = "meiB 관리자";
-		String from = "ssohirokr@naver.com";
-		String to = email;
-		String content = "인증 번호 [ " + authNum + " ]";
-		
-		Properties props = new Properties();
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", 587);
-		props.put("mail.smtp.auth", "true");
-		
-		//인증 번호 생성기
-        StringBuffer temp =new StringBuffer();
-        Random rnd = new Random();
-        for(int i = 0 ; i < 10 ; i++) {
-            int rIndex = rnd.nextInt(3);
-            switch (rIndex) {
-            case 0:
-                // a-z
-                temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-                break;
-            case 1:
-                // A-Z
-                temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-                break;
-            case 2:
-                // 0-9
-                temp.append((rnd.nextInt(10)));
-                break;
-            }
-        }
-        String AuthenticationKey = temp.toString();
-        System.out.println(AuthenticationKey);
-		
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
-            }
-        });
-		
-		try {
-			Message msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(user));
-			msg.addRecipient(Message.RecipientType.TO, new InternetAddress("maiB@maib.com"));
+        memberDao.createAuthKey(vo.getEmail(),key); //인증키 db 저장
+        //메일 전송
+        MailService sendMail = new MailService(mailSender);
+        sendMail.setSubject("[meiB 서비스 이용 이메일 인증]");
+        sendMail.setText(
+                new StringBuffer().append("<h2>메일인증</h2>")
+                .append("<a href='http://localhost:8080/spring/emailConfirm?email=")
+                .append(vo.getEmail()).append("&mem=")
+                .append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
+        sendMail.setFrom("choi87066@gmail.com", "meiB 관리자 ");
 
-			msg.setSubject(subject);
-			msg.setSentDate(new java.util.Date());
-			msg.setContent(content, "text/html; charset=UTF-8");
-			InternetAddress addr = new InternetAddress(to);
-			msg.setRecipient(Message.RecipientType.TO, addr);
-			
-			Transport.send(msg); // 매일 보내기
-			System.out.println("message sent successfully...");
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-	}
+        sendMail.setTo(vo.getEmail());
+        sendMail.send();
+    }
+
+    //이메일 인증 키 검증
+    public MemberVO userAuth(MemberVO user) throws Exception {
+        MemberVO vo =new MemberVO();
+        vo = memberDao.chkAuth(user);
+        if(vo!=null){
+            try{
+                memberDao.userAuth(user);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }}
+        return vo;
+    }
+    
 	public int idcheck(String id) {
 		int cnt = memberDao.idcheck(id);
 		return cnt;

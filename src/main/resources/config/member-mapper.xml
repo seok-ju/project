@@ -5,7 +5,7 @@
 <mapper namespace="MemberDao">
 		<!-- 로그인, 특정 아이디 정보출력 -->
         <select id="info" parameterType="String" resultType="memberVO">
-        	SELECT * FROM MEMBER WHERE ID = #{id}
+        	select * from (SELECT * FROM MEMBER WHERE ID = #{id}) where MEM = '회원' or MEM='관리자'
         </select>
         
         <!-- 회원 리스트 출력 -->
@@ -15,8 +15,8 @@
         
         <!-- 회원가입 -->
         <insert id="signUp" parameterType="memberVO">
-        	INSERT INTO MEMBER (ID, PW, NAME, ADDR, PHONE, EMAIL, MEM)
-        	VALUES (#{id}, PASSWORD(#{pw}), #{name}, #{addr}, #{phone}, #{email}, #{mem})
+        	INSERT INTO MEMBER (NUM, ID, PW, NAME, ADDR, PHONE, EMAIL, MEM)
+        	VALUES (MEMBER_SEQ.nextval, #{id}, #{pw}, #{name}, #{addr}, #{phone}, #{email}, #{mem})
         </insert>
         
         <!-- 회원 삭제 -->
@@ -33,6 +33,14 @@
         <select id="idcheck" parameterType="String" resultType="Integer">
 	      SELECT COUNT(*) FROM member WHERE id = #{id}
 		</select>
-        
-        
+		<select id="chkAuth" parameterType="memberVO" resultType="memberVO">
+			select * from (select * from MEMBER where EMAIL = #{email}) where MEM = #{mem}
+		</select>
+		<update id="createAuthKey" parameterType="memberVO">
+			update MEMBER set MEM = #{mem} where EMAIL = #{email}
+		</update>
+		
+		<update id="userAuth" parameterType="memberVO">
+			update MEMBER set MEM='회원' where EMAIL = #{email} and MEM = #{mem}
+		</update>
 </mapper>

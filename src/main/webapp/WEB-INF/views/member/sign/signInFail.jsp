@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<meta http-equiv="refresh" content="3; url=<c:url value="/index" />"> <!-- 인덱스 이동 컨트롤러 필요 -->
+		<meta http-equiv="refresh" content="3; url=<c:url value="/member/sign/signIn" />"> <!-- 인덱스 이동 컨트롤러 필요 -->
 		<style type="text/css">
 			#line {
 				margin:auto;

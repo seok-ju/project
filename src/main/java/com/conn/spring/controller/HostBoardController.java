@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.conn.spring.VO. HostBoardVo;
 import com.conn.spring.service.HostBoardService;
-import com.conn.spring.service.Pagination;
+import com.conn.spring.service.PagingService;
 
 @Controller
 public class HostBoardController {
@@ -19,7 +19,7 @@ public class HostBoardController {
 	@RequestMapping(value="/hostboard/faq")
 	public String faq(@RequestParam(defaultValue="1") int curPage, Model model) {
 		int listCnt = hostBoardService.listCntFAQ();
-		Pagination pagination = new Pagination(listCnt, curPage);
+		PagingService pagination = new PagingService(listCnt, curPage);
 		model.addAttribute("hostBoardList", hostBoardService.listFAQ(pagination.getStartIndex()));
 		model.addAttribute("pagination", pagination);
 		return "/hostboard/faq";
@@ -28,7 +28,7 @@ public class HostBoardController {
 	@RequestMapping(value="/hostboard/notice")
 	public String notice(@RequestParam(defaultValue="1") int curPage, Model model) {
 		int listCnt = hostBoardService.listCntNO();
-		Pagination pagination = new Pagination(listCnt, curPage);
+		PagingService pagination = new PagingService(listCnt, curPage);
 		model.addAttribute("hostBoardList", hostBoardService.listNO(pagination.getStartIndex()));
 		model.addAttribute("pagination", pagination);
 		return "/hostboard/notice";
