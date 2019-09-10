@@ -32,7 +32,7 @@ public class ProductController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
-	@RequestMapping(value="/product/main")
+	@RequestMapping(value="/index")
 	public String list(Model model,
 			@CookieValue(value="recent", required = false)Cookie cookie,
 			@RequestParam(defaultValue="1") int curPage,
@@ -91,7 +91,7 @@ public class ProductController {
 		model.addAttribute("code", code);
 		model.addAttribute("Cnt", Cnt);
 		model.addAttribute("allList", allList);
-		return "/product/main";
+		return "/index";
 	}
 	
 	@RequestMapping(value="/product/main/search", method=RequestMethod.POST)
@@ -161,11 +161,11 @@ public class ProductController {
 		productVO.setProImg2(url);
 		
 		String proViewPrice = NumberFormat.getInstance().format(productVO.getProPrice());
-		productVO.setProViewPrice(proViewPrice+"원");
+		productVO.setProViewPrice(proViewPrice+"�썝");
 		
 		productService.insert(productVO);
 				
-		return "redirect:/product/main";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(value="/product/modify/{proNum}", method=RequestMethod.GET)
@@ -197,7 +197,7 @@ public class ProductController {
 		
 		productService.update(productVO);
 				
-		return "redirect:/product/main";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(value="/product/price/{proNum}", method=RequestMethod.GET)
@@ -215,7 +215,7 @@ public class ProductController {
 		if(productVO.getProContent()==null)productVO.setProContent("");
 		
 		String proViewPrice = NumberFormat.getInstance().format(price);
-		productVO.setProViewPrice(proViewPrice+"원");
+		productVO.setProViewPrice(proViewPrice+"�썝");
 		productVO.setProPrice(price);
 		
 		productService.priceChange(productVO, proNum);
@@ -227,7 +227,7 @@ public class ProductController {
 		
 		productService.changeProNum(map);
 		
-		return "redirect:/product/main";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(value="/product/delete")
@@ -245,10 +245,10 @@ public class ProductController {
 			response.addCookie(cookie);
 		}
 		
-		return "redirect:/product/main";
+		return "redirect:/index";
 	}
 	
-	// 주문창 연결
+	// 二쇰Ц李� �뿰寃�
 	@RequestMapping(value="/product/order/{proNum}")
 	public String order(Model model,
 		@PathVariable int proNum,

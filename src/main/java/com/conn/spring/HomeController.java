@@ -35,4 +35,14 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@RequestMapping(value = "index", method = RequestMethod.GET)
+	public String index() {
+		return "index";
+	}
+	@RequestMapping(value = "support", method = RequestMethod.GET)
+	public String support() {
+		return "hostboard/support";
+	}
+
 }

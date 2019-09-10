@@ -54,8 +54,7 @@ div {
 	position:relative;
 	height:200px;
 	margin-top:10px;
-	border:1px solid #ffffff;
-	background:#c9a383;
+	border:2px solid #c9a383;
 	text-align:center;
 }
 #footer {

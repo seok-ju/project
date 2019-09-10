@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <% if (session.getAttribute("user") != null) { %>
-<c:redirect url="구매폼" />
+<c:redirect url="/board/order" />
 <% } %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>meiB</title>
-		<link href="/resources/css/main_style.css" rel="stylesheet"  type="text/css"/>
+		<link href="${pageContext.request.contextPath}/resources/css/main_style.css" rel="stylesheet" type="text/css">
 		<style>
         #sign {
             border:3px solid #c9a383;
@@ -42,10 +42,10 @@
 		<body>
 		<div id="wrap">
 			<div class='ribbon'>
-				<a href='#'><span>product</span></a>
-				<a href='#'><span>cart</span></a>
+				<a href='index'><span>product</span></a>
+				<a href='<c:url value="/product/cart"/>'><span>cart</span></a>
 				<a href='#'><span>myPage</span></a>
-				<a href='#'><span>support</span></a>
+				<a href='support'><span>support</span></a>
 			</div>
 			<form action="#" method="get" id="search">
 				<div class="right-box" style="text-align: right;">	

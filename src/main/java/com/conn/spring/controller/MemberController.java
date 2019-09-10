@@ -49,25 +49,25 @@ public class MemberController {
        
        MemberVO memberVO = new MemberVO(id, pwSecurity, name, addr, phone, email);
        memberSignService.signUp(memberVO);
-       rttr.addFlashAttribute("msg" , "가입시 사용한 이메일로 인증해주세요");
+       rttr.addFlashAttribute("msg" , "媛��엯�떆 �궗�슜�븳 �씠硫붿씪濡� �씤利앺빐二쇱꽭�슂");
         return "member/sign/signUpComplet";
     }
     
-    //이메일 인증 코드 검증
+    //�씠硫붿씪 �씤利� 肄붾뱶 寃�利�
     @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
     public String emailConfirm(MemberVO user,Model model,RedirectAttributes rttr) throws Exception { 
         
         MemberVO vo = new MemberVO();
         vo = memberSignService.userAuth(user);
         if(vo == null) {
-            rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-            return "redirect:/product/main";
+            rttr.addFlashAttribute("msg" , "鍮꾩젙�긽�쟻�씤 �젒洹� �엯�땲�떎. �떎�떆 �씤利앺빐 二쇱꽭�슂");
+            return "redirect:/index";
         }
         model.addAttribute("login",vo);
         return "redirect:/member/sign/signIn";
     }
     
-    // 아이디 중복체크
+    // �븘�씠�뵒 以묐났泥댄겕
     @RequestMapping(value = "/idCheck")
     @ResponseBody
     public int idcheck(@RequestParam("id") String id) {
@@ -75,7 +75,7 @@ public class MemberController {
     }    
     
     
-    // 로그인
+    // 濡쒓렇�씤
     @RequestMapping(value="/member/sign/signIn", method=RequestMethod.GET)
     public String signInGET() {
        return "member/sign/signIn";
@@ -119,20 +119,20 @@ public class MemberController {
        model = null;
     }
 
-    // 회원정보
+    // �쉶�썝�젙蹂�
     @RequestMapping("/member/list")
     public String memberList(Model model){
-    // controller => service => dao 요청
+    // controller => service => dao �슂泥�
         List<MemberVO> list = memberInfoService.memberInfoList();
         model.addAttribute("list", list);
         return "member/list";
     }
     @RequestMapping("member/view")
     public String memberView(String id, Model model){
-        // 회원 정보를 model에 저장
+        // �쉶�썝 �젙蹂대�� model�뿉 ���옣
        model.addAttribute("userVo", memberInfoService.Info(id));
         return "member/view";
     }
     
-    // 회원삭제
+    // �쉶�썝�궘�젣
 }

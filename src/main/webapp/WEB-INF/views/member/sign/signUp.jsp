@@ -159,71 +159,67 @@
             <img alt="index" src="${pageContext.request.contextPath}/resources/image/logo.png" align="middle">
          </div>
          <div id="container">
-            <div id="content">
-      <!-- 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
-       <div>
-           <br><br>
-           <b><font size="6" color="#c9a383">회원가입</font></b>
-           <br><br>
-           <form method="post" action="<c:url value="/member/sign/signUp" />">
-               <table>
-                   <tr>
-                       <td id="title">아이디</td>
-                       <td>
-                           <input type="text" name="id" id="id" maxlength="20" placeholder="ID" required>
-                           <input type="button" value="중복확인" id="idck" name="idck">
-                       </td>
-                   </tr>
-                   <tr>
-                       <td id="title">비밀번호</td>
-                       <td>
-                           <input type="password" name="pw1" id="pw1" maxlength="15">
-                       </td>
-                   </tr>
-                   <tr>
-                       <td id="title">비밀번호 확인</td>
-                       <td>
-                           <input type="password" name="pw2" id="pw2" maxlength="15">
-                       </td>
-                   </tr>
-                   <tr>
-                       <td id="title">이름</td>
-                       <td>
-                           <input type="text" name="name" id="name" maxlength="40">
-                       </td>
-                   </tr>
-                   <tr>
-                       <td id="title">이메일</td>
-                       <td>
-                           <input type="text" name="email_1" id="email_1" maxlength="30">@
-                           <input type="text" name="email_2" id="email_2" maxlength="20">
-                           <a href="<c:url value="/emailAuth" />"><input type="button" value="메일인증" /></a>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td id="title">휴대전화</td>
-                       <td>
-                           <input type="text" name="phone" id="phone" />
-                       </td>
-                   </tr>
-                   <tr>
-                       <td id="title">주소</td>
-                       <td>
-                          <span id="guide" style="color:#999;display:none"></span>
-                           <input type="text" size="10" name="addr_0" id="addr_0" placeholder="우편번호" /> <input type="text" size="20" name="addr_1" id="addr_1" placeholder="도로명 주소" />
-                           <br><input type="text" size="15" name="addr_2" id="addr_2" placeholder="상세주소" /> <input type="button" onclick="execDaumPostcode()" value="주소검색">
-                       </td>
-                   </tr>
-               </table>
-               <br>
-               <input type="submit" value="가입" onclick="DosignUp()"/>  <input type="reset" value="재작성"/>  <a href="index"><input type="button" value="뒤로가기"></a>
-           </form>
-       </div>
-   </div>
+            <div id="content" style="height: 300px;">
+		      <!-- 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
+		           <b><font size="6" color="#c9a383">회원가입</font></b>
+		           <br><br>
+		           <form method="post" action="<c:url value="/member/sign/signUp" />">
+		               <table style="color: #000000; margin: auto;">
+		                   <tr>
+		                       <td id="title">아이디</td>
+		                       <td>
+		                           <input type="text" name="id" id="id" maxlength="20" placeholder="ID" required>
+		                           <input type="button" value="중복확인" id="idck" name="idck">
+		                       </td>
+		                   </tr>
+		                   <tr>
+		                       <td id="title">비밀번호</td>
+		                       <td>
+		                           <input type="password" name="pw1" id="pw1" maxlength="15">
+		                       </td>
+		                   </tr>
+		                   <tr>
+		                       <td id="title">비밀번호 확인</td>
+		                       <td>
+		                           <input type="password" name="pw2" id="pw2" maxlength="15">
+		                       </td>
+		                   </tr>
+		                   <tr>
+		                       <td id="title">이름</td>
+		                       <td>
+		                           <input type="text" name="name" id="name" maxlength="40">
+		                       </td>
+		                   </tr>
+		                   <tr>
+		                       <td id="title">이메일</td>
+		                       <td>
+		                           <input type="text" name="email_1" id="email_1" maxlength="30">@
+		                           <input type="text" name="email_2" id="email_2" maxlength="20">
+		                           <a href="<c:url value="/emailAuth" />"><input type="button" value="메일인증" /></a>
+		                       </td>
+		                   </tr>
+		                   <tr>
+		                       <td id="title">휴대전화</td>
+		                       <td>
+		                           <input type="text" name="phone" id="phone" />
+		                       </td>
+		                   </tr>
+		                   <tr>
+		                       <td id="title">주소</td>
+		                       <td>
+		                          <span id="guide" style="color:#999;display:none"></span>
+		                           <input type="text" size="10" name="addr_0" id="addr_0" placeholder="우편번호" /> <input type="text" size="20" name="addr_1" id="addr_1" placeholder="도로명 주소" />
+		                           <br><input type="text" size="15" name="addr_2" id="addr_2" placeholder="상세주소" /> <input type="button" onclick="execDaumPostcode()" value="주소검색">
+		                       </td>
+		                   </tr>
+		               </table>
+		               <br>
+		               <input type="submit" value="가입" onclick="DosignUp()"/>  <input type="reset" value="재작성"/>  <a href="index"><input type="button" value="뒤로가기"></a>
+		           </form>
+		   </div>
          </div>
          <div id="footer">
             <p>Copyright 2019. Connect. all rights reserved.</p>
-         </div>
       </div>
    </body>
 </html>
