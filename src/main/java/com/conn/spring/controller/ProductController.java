@@ -32,7 +32,7 @@ public class ProductController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/product/main")
 	public String list(Model model,
 			@CookieValue(value="recent", required = false)Cookie cookie,
 			@RequestParam(defaultValue="1") int curPage,
@@ -165,7 +165,7 @@ public class ProductController {
 		
 		productService.insert(productVO);
 				
-		return "redirect:/index";
+		return "redirect:/product/main";
 	}
 	
 	@RequestMapping(value="/product/modify/{proNum}", method=RequestMethod.GET)

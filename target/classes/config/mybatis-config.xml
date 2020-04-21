@@ -10,5 +10,7 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 
-	
+	<typeAliases>
+		<package name="com.conn.spring.VO"/>
+	</typeAliases>
 </configuration>

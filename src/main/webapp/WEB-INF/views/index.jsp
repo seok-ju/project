@@ -10,26 +10,25 @@
 		
 	</head>
 	<body>
-		<div id="wrap">
+			<div id="wrap">
 			<div class='ribbon'>
-				<a href='index'><span>product</span></a>
+				<a href='<c:url value="/product/main"/>'><span>product</span></a>
 				<a href='<c:url value="/product/cart"/>'><span>cart</span></a>
 				<a href='#'><span>myPage</span></a>
 				<a href='support'><span>support</span></a>
 			</div>
+			<div class="left-box" style="text-align: left;">	
 <c:if test="${user eq null }"> 
 			<form action='<c:url value="/member/sign/signIn"/>' method="post" id="loginForm">
-				<div class="left-box" style="text-align: left;">	
 					<input type="text" id="id" name="id" placeholder="ID"> <input type="password" id="pw" name="pw" placeholder="Password">
-					<input type="submit" disabled="disabled" value="Sign In" />	<input type="button" disabled="disabled" value="Sign up" />
-				</div>
+					<button>Sign in</button>	
 			</form>
+			<button onclick="location.href='<c:url value='/member/sign/signUp'/>'">Sign up</button>
 </c:if>
 <c:if test="${user ne null }">
-			<div class="left-box" style="text-align: left;">
 				<a href="/member/sign/signOut"><input type="button" value="sign Out"></a>
-			</div>
 </c:if>
+			</div>
 			<form action="<c:url value="/product/main/search"/>" method="post" id="search">
 				<div class="right-box" style="text-align: right;">	
 					<input type="text" name="search" id="search" placeholder="검색하실 단어를 입력하세요.">
